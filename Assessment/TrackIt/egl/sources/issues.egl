@@ -1,0 +1,70 @@
+[% import "utils.egl"; %]
+[%=TemplateFactory.load("sources/navbar.egl").process()%]
+[%=TemplateFactory.load("sources/css/grid.egl").process()%]
+
+<h1 style="text-align:center;">Issues</h1>
+
+[% if (issues.select(i | i.status == IssueStatus#OPEN).size() > 0) {%]
+<h2 style="text-align:center;">Open:</h2>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Title</th>
+		<th>Issue Type</th>
+	</tr>
+	
+	[% for (i in issues.select(i | i.status == IssueStatus#OPEN)) {%]
+	     <tr>
+	      <td>[%=i.createLink()%]</td>
+		  <td>[%=i.title%]</td>
+          <td>[%=i.issueType.enumSetToString()%]</td>
+	     </tr>
+	[%}%]
+</table>
+[% } else {%]
+<h2 style="text-align:center">No open issues</h1>
+[% } %]
+
+[% if (issues.select(i | i.status == IssueStatus#CLOSED).size() > 0) {%]
+<h2 style="text-align:center;">Closed:</h2>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Title</th>
+		<th>Issue Type</th>
+	</tr>
+	
+	[% for (i in issues.select(i | i.status == IssueStatus#CLOSED)) {%]
+	     <tr>
+	      <td>[%=i.createLink()%]</td>
+		  <td>[%=i.title%]</td>
+          <td>[%=i.issueType.enumSetToString()%]</td>
+	     </tr>
+	[%}%]
+</table>
+[% } else {%]
+<h2 style="text-align:center">No open issues</h1>
+[% } %]
+
+[% if (issues.select(i | i.blocking.size() > 0).size() > 0) {%]
+<h2 style="text-align:center;">Blocking:</h2>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Title</th>
+		<th>No. Issues Blocking</th>
+		<th>Issue Type</th>
+	</tr>
+	
+	[% for (i in issues.select(i | i.blocking.size() > 0).sortBy(i | i.blocking.size()).invert()) {%]
+	     <tr>
+	      <td>[%=i.createLink()%]</td>
+		  <td>[%=i.title%]</td>
+		  <td>[%=i.blocking.size()%]</td>
+          <td>[%=i.issueType.enumSetToString()%]</td>
+	     </tr>
+	[%}%]
+</table>
+[% } else {%]
+<h2 style="text-align:center">No blocking issues</h1>
+[% } %]

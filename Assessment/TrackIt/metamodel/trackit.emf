@@ -1,0 +1,120 @@
+@namespace(uri="trackit", prefix="trackit")
+package trackit;
+
+@gmf.diagram
+class IssueTracker {
+  attr String projectName;
+  val Team[+] teams;
+  val Product[+] products;
+  val Issue[*] issues;
+  val Member[+] members;
+}
+
+/*
+* Similar to Hibernate's identifiable
+*/
+abstract class Identifiable {
+  id attr String uuid;
+}
+
+@gmf.node(label="fullName")
+class Member extends Identifiable {
+  attr String firstName;
+  attr String lastName;
+  
+  transient derived attr String fullName;
+    
+  ref Issue[*]#author issuesCreated;
+  ref Comment[*]#author comments;
+  
+  @gmf.link(label="Issues assigned", style="solid")
+  ref Issue[*]#assignedTo issuesAssigned;
+}
+
+@gmf.node(label="teamName")
+class Team extends Identifiable {
+  attr String teamName;
+  
+  // Colour: soft blue
+  @gmf.link(target.decoration="arrow", style="solid", color="153,186,221", label="Members")
+  ref Member[+] members;
+}
+
+@gmf.node(label="name")
+class Product extends Identifiable {
+  attr String name;
+  
+  @gmf.compartment(layout="list")
+  val Version[+] version;
+}
+
+@gmf.node(label="name")
+class Version extends Identifiable {
+  attr String name;
+  attr VersionStatus status;
+  
+  ref Product product;
+  ref Issue[*]#versionsAffected issues;
+}
+
+enum VersionStatus {
+  IN_PROGRESS;
+  COMPLETE;
+}
+
+enum IssueStatus {
+  OPEN;
+  CLOSED;
+}
+
+enum IssueType {
+  ENHANCEMENT;
+  BUG;
+  WONT_FIX;
+  HELP_REQUIRED;
+  DUPLICATE;
+}
+
+@gmf.node(label="title")
+class Issue extends Identifiable {
+  attr String title;
+  attr String description;
+  attr String dateCreated;
+  attr IssueStatus status;
+  attr IssueType[+] issueType;
+
+  ref Member#issuesCreated author;  
+  ref Issue[*]#blocking blockers;
+  ref Member[*]#issuesAssigned assignedTo;
+  
+  @gmf.compartment(layout="list")
+  val Comment[*]#issue comments;
+  
+  // Colour: Crimson
+  @gmf.link(target.decoration="arrow", style="dash", color="220,20,60", label="Duplicate of")
+  ref Issue[*] duplicateOf;
+  
+  // Colour: Forest green
+  @gmf.link(target.decoration="arrow", style="dash", color="34,139,34", label="Dependencies")
+  ref Issue[*] dependencies;
+    
+  @gmf.link(target.decoration="arrow", style="dash", label="Versions Affected")
+  ref Version[+]#issues versionsAffected;
+  
+  // Colour: Magenta
+  @gmf.link(target.decoration="arrow", color="255,0,255", label="Blocking")
+  ref Issue[*]#blockers blocking;
+}
+
+@gmf.node(label="text")
+class Comment extends Identifiable {
+  attr String text;
+  attr String dateCreated;
+
+  ref Issue#comments issue;
+  ref Member#comments author;
+  ref Comment#replies parent;
+  
+  @gmf.compartment(layout="list")
+  val Comment[*]#parent replies;
+}

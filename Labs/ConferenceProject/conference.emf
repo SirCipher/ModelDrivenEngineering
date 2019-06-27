@@ -1,0 +1,45 @@
+@namespace(uri="conference", prefix="")
+package conference;
+
+class Conference {
+	attr String name;
+	val Person[*] participants;
+	val Room[*] rooms;
+	val Day[*] days;
+}
+
+class Talk {
+	attr String title;
+	attr int duration;
+	ref Person[+] speaker;
+	ref Person[*] discussant;
+}
+
+class Person {
+	attr String fullName;
+	attr String affiliation;
+}
+
+class Day {
+	attr String name;
+	val Slot[+] slots;
+}
+
+class Track extends Slot{
+	attr String title;
+	val Talk[*] talks;
+}
+
+class Room {
+	attr String name;
+}
+
+class Break extends Slot {
+	attr String reason;
+}
+
+abstract class Slot {
+	attr String start;
+	attr String end;
+	ref Room room;
+}

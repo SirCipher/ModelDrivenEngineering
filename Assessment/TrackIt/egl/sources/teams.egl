@@ -1,0 +1,26 @@
+[% import "utils.egl"; %]
+[%=TemplateFactory.load("sources/navbar.egl").process()%]
+[%=TemplateFactory.load("sources/css/grid.egl").process()%]
+
+<h1 style="text-align:center;">Teams</h1>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>UUID</th>
+		<th>Members</th>
+	</tr>
+	
+	[% for (t in teams) {%]
+	     <tr>
+	      <td>[%=t.teamName%]</td>
+	      <td>[%=t.createLink()%]</a></td>
+	      <td>
+	      [% for (m in t.members) {%]
+	      	<p>[%=m.createLink()%]</p>		
+	      [%}%]
+	      <p><b>Total Members: [%=t.members.size()%]<b></p>
+		  </td>
+	     </tr>
+	[%}%]
+	
+</table>

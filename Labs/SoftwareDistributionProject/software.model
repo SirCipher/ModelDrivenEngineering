@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Bundle xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="softwareDistribution" xmi:id="_ZAhiIMxuEeiOYdhZW8iXow" name="MyFirstBundle" price="50.0">
+  <pools xmi:id="_Zp7EcMxuEeiOYdhZW8iXow" name="MyFirstPool">
+    <components xmi:id="_dbxlcMxuEeiOYdhZW8iXow" name="Component1" dependencies="_efd3EMxuEeiOYdhZW8iXow"/>
+    <components xmi:id="_efd3EMxuEeiOYdhZW8iXow" name="Dependency1"/>
+  </pools>
+</Bundle>

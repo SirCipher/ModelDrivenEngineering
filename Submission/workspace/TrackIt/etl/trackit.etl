@@ -1,0 +1,90 @@
+/**
+*	Model-to-model transformation that excludes:
+*		- Closed issues
+*		- Team members that do not have open issues
+*		- Products that do not have open issues
+*	Transformation does not alter the source model	
+* 	
+* 	Most data structures are sets so there is no requirement
+* 	to check if duplicates exist
+*
+* 	Where OrderedSets were used as operation arguments,
+* 	I was unsure as to how to specify a type to the argument
+*/
+
+pre {
+	"Transformation starting".println();
+}
+
+rule IssueTracker
+	transform input: Input!IssueTracker
+	to output: Output!IssueTracker {
+		output.projectName = input.projectName;
+
+		output.products = input.products.select(p | p.openIssues());
+		output.products.forAll(p | p.version.forAll(v | v.issues = v.issues.select(i | i.status == IssueStatus#OPEN)));
+		
+		output.members = input.members.select(m | m.openIssues());
+		
+		output.teams = input.teams.select(t | t.openIssues());
+		output.teams.forAll(t | t.members.forAll(m | m.issuesAssigned = Any.openIssues(m.issuesAssigned)));
+		output.teams.forAll(t | t.members.forAll(m | m.issuesCreated = Any.openIssues(m.issuesCreated)));
+
+		output.issues = input.issues.select(iss | iss.status == IssueStatus#OPEN);
+		output.issues = Any.filterBlocks(output.issues);
+	}
+
+// Returns open issues
+operation Any openIssues(l : OrderedSet) {
+	return l.select(i | i.status == IssueStatus#OPEN);
+}
+
+// Removes any blocking/blockers issues that refer to closed issues 
+operation Any filterBlocks(issues : OrderedSet) {
+	for (i in issues) {
+		var filtered = OrderedSet{};
+		
+		for (blocker in i.blockers) {
+			if (issues.select(i | i == blocker).size() == 0) {
+				filtered.add(blocker);
+			}
+		}
+		
+		i.blockers.removeAll(filtered);
+		filtered.clear();
+		
+		for (blocker in i.blocking) {
+			if (issues.select(i | i == blocker).size() == 0) {
+				filtered.add(blocker);
+			}
+		}
+		
+		i.blocking.removeAll(filtered);
+	}
+}
+
+// Returns whether or not the product has open issues
+operation Input!Product openIssues() : Boolean {
+	for (v in self.version) {
+		if (v.issues.select(i | i.status == IssueStatus#OPEN).size > 0) {
+			return true;
+		}
+	}
+	
+	return false;
+}
+
+// Returns members of a team that have open issues
+operation Input!Team openIssues() : Boolean {
+	return self.members.select(m | m.openIssues()).size > 0;
+}
+
+// Returns whether or not a member has issues assigned to it or has created issues, and that are open
+operation Input!Member openIssues() : Boolean {
+	return self.issuesAssigned.select(i | i.status == IssueStatus#OPEN).size > 0 
+			or self.issuesCreated.select(i | i.status == IssueStatus#OPEN).size > 0;
+}
+
+post {
+	"Transformation finished".println();
+}

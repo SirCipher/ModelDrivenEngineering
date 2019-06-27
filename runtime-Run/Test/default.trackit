@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<trackit:IssueTracker xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:trackit="trackit">
+  <teams uuid="d2d3c77d-def4-489d-92aa-fa993554df48" teamName="Management" members="6357175d-0c3f-42d1-bf4c-49fc3c0a31ff"/>
+  <teams uuid="27f3d355-e574-40c7-b4fc-7971975bd356" teamName="Developers" members="cd24a81b-1fb7-43b3-a35b-e51d5a51f604"/>
+  <teams uuid="99456337-354f-4337-92f4-f2bceca4fb0f" teamName="Remote Workers" members="cd24a81b-1fb7-43b3-a35b-e51d5a51f604 e908d4ba-2009-427e-8224-47486509acb2"/>
+  <teams uuid="793fce2f-42d9-41b3-8379-a8457dd3b7a3" teamName="Imaging" members="e908d4ba-2009-427e-8224-47486509acb2"/>
+  <products uuid="8893917f-2efc-4415-96c5-c6cff0d8effb" name="Photoshop 4">
+    <version uuid="ee0c31db-eae4-4a30-9cb1-e75d43defbc9" name="4.1" product="8893917f-2efc-4415-96c5-c6cff0d8effb" issues="eba2571d-a042-47aa-ac04-6aaae35c9846"/>
+    <version uuid="254f0ca0-7cd4-4db0-b32f-0ac978e62450" name="4.2" product="8893917f-2efc-4415-96c5-c6cff0d8effb" issues="f663959a-cd7d-40b0-9e3e-ff385edba867"/>
+  </products>
+  <issues uuid="3963cdb2-a575-43ea-b580-1d3f20c7533a" title="Port in use exception" description="1" dateCreated="22:31:02 12-06-2019" status="CLOSED" author="cd24a81b-1fb7-43b3-a35b-e51d5a51f604" assignedTo="6357175d-0c3f-42d1-bf4c-49fc3c0a31ff" blocking="eba2571d-a042-47aa-ac04-6aaae35c9846">
+    <issueType>BUG</issueType>
+  </issues>
+  <issues uuid="eba2571d-a042-47aa-ac04-6aaae35c9846" title="Exception thrown when loading .GIF files" description="" dateCreated="2019-06-07 19:01:17" blockers="3963cdb2-a575-43ea-b580-1d3f20c7533a a0e3982c-aecf-46ad-bbe8-33aba6e6e951" assignedTo="e908d4ba-2009-427e-8224-47486509acb2" versionsAffected="ee0c31db-eae4-4a30-9cb1-e75d43defbc9" blocking="15274e5c-3098-4104-bc02-6ffad7c342a2 398c8244-1945-4cf2-b949-c8880832c184">
+    <issueType>HELP_REQUIRED</issueType>
+    <comments uuid="3ec89014-8285-4b5c-a508-5505bc9bbeb2" text="Can you provide a sample file?" dateCreated="23:11:24 12-06-2019">
+      <replies uuid="c6532c40-94eb-4cf4-b76f-b60776f0b100" text="Yes, I will add one to the dev drive" dateCreated="23:11:33 12-06-2019">
+        <replies uuid="aa473be9-e11b-4cde-8999-85bae3f981f1" text="Thanks. I will look in to this" dateCreated="23:11:59 12-06-2019"/>
+      </replies>
+    </comments>
+    <comments uuid="54b4f7e0-6f32-45ff-93ae-fdfed32ca41b" text="Does this happen before other file types have been loaded?" dateCreated="23:12:06 12-06-2019"/>
+  </issues>
+  <issues uuid="a0e3982c-aecf-46ad-bbe8-33aba6e6e951" title="File parsing issue" description="" dateCreated="23:29:20 12-06-2019" assignedTo="cd24a81b-1fb7-43b3-a35b-e51d5a51f604" blocking="eba2571d-a042-47aa-ac04-6aaae35c9846">
+    <issueType>BUG</issueType>
+  </issues>
+  <issues uuid="15274e5c-3098-4104-bc02-6ffad7c342a2" title="Add .PNG support" dateCreated="23:29:43 12-06-2019" blockers="eba2571d-a042-47aa-ac04-6aaae35c9846">
+    <issueType>ENHANCEMENT</issueType>
+  </issues>
+  <issues uuid="f663959a-cd7d-40b0-9e3e-ff385edba867" title="Addition of file types" dateCreated="23:32:13 12-06-2019" dependencies="398c8244-1945-4cf2-b949-c8880832c184 15274e5c-3098-4104-bc02-6ffad7c342a2" versionsAffected="254f0ca0-7cd4-4db0-b32f-0ac978e62450">
+    <issueType>ENHANCEMENT</issueType>
+  </issues>
+  <issues uuid="398c8244-1945-4cf2-b949-c8880832c184" title="Add .SVG support" dateCreated="23:32:25 12-06-2019" blockers="eba2571d-a042-47aa-ac04-6aaae35c9846">
+    <issueType>ENHANCEMENT</issueType>
+  </issues>
+  <issues uuid="d79f9936-764f-455b-ae40-da2a2eeb413e" title="Parsing exceptions" dateCreated="23:34:55 12-06-2019" assignedTo="cd24a81b-1fb7-43b3-a35b-e51d5a51f604" duplicateOf="a0e3982c-aecf-46ad-bbe8-33aba6e6e951">
+    <issueType>DUPLICATE</issueType>
+  </issues>
+  <members uuid="6357175d-0c3f-42d1-bf4c-49fc3c0a31ff" firstName="Member" lastName="A" issuesAssigned="3963cdb2-a575-43ea-b580-1d3f20c7533a"/>
+  <members uuid="cd24a81b-1fb7-43b3-a35b-e51d5a51f604" firstName="Member" lastName="B" issuesCreated="3963cdb2-a575-43ea-b580-1d3f20c7533a" issuesAssigned="a0e3982c-aecf-46ad-bbe8-33aba6e6e951 d79f9936-764f-455b-ae40-da2a2eeb413e"/>
+  <members uuid="e908d4ba-2009-427e-8224-47486509acb2" firstName="Member" lastName="C" issuesAssigned="eba2571d-a042-47aa-ac04-6aaae35c9846"/>
+</trackit:IssueTracker>

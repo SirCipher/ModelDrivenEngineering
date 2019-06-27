@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ASCII"?>
+<trackit:IssueTracker xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:trackit="trackit" xmi:id="_d3eHIIhkEemOIe1_sA_OEg" projectName="asdasd">
+  <teams xmi:id="_c0ZU8IkyEemOIe1_sA_OEg" uuid="1" teamName="Management" members="_--vT0IkxEemOIe1_sA_OEg"/>
+  <teams xmi:id="_r_XtgIk2EemOIe1_sA_OEg" uuid="2" teamName="Developers" members="_rvmzMIk2EemOIe1_sA_OEg _--vT0IkxEemOIe1_sA_OEg"/>
+  <products xmi:id="_5b02IIk3EemOIe1_sA_OEg" uuid="14" name="Photoshop">
+    <version xmi:id="_6M3RgIk3EemOIe1_sA_OEg" uuid="54" name="2018" product="_5b02IIk3EemOIe1_sA_OEg" issues="__l81EIlCEemOIe1_sA_OEg"/>
+    <version xmi:id="_TEjj0Ik4EemOIe1_sA_OEg" uuid="16" name="2019" product="_5b02IIk3EemOIe1_sA_OEg" issues="__l81EIlCEemOIe1_sA_OEg _UDYsIIlPEemTkeRSx6a1Ig _BXUFAIlDEemOIe1_sA_OEg _14LXMI1_EemSnpBd0HphaQ"/>
+  </products>
+  <issues xmi:id="__l81EIlCEemOIe1_sA_OEg" uuid="234453" title="Random crashes" description="GIFs don't create correctly" author="_rvmzMIk2EemOIe1_sA_OEg" blockers="__l81EIlCEemOIe1_sA_OEg _BXUFAIlDEemOIe1_sA_OEg" assignedTo="_--vT0IkxEemOIe1_sA_OEg" duplicateOf="__l81EIlCEemOIe1_sA_OEg" versionsAffected="_6M3RgIk3EemOIe1_sA_OEg _TEjj0Ik4EemOIe1_sA_OEg" blocking="__l81EIlCEemOIe1_sA_OEg">
+    <issueType>BUG</issueType>
+    <issueType>DUPLICATE</issueType>
+  </issues>
+  <issues xmi:id="_BXUFAIlDEemOIe1_sA_OEg" uuid="cbvcvbcvb" title="2" status="CLOSED" author="_rvmzMIk2EemOIe1_sA_OEg" blockers="_BXUFAIlDEemOIe1_sA_OEg" assignedTo="_rvmzMIk2EemOIe1_sA_OEg" versionsAffected="_TEjj0Ik4EemOIe1_sA_OEg" blocking="_BXUFAIlDEemOIe1_sA_OEg __l81EIlCEemOIe1_sA_OEg _UDYsIIlPEemTkeRSx6a1Ig">
+    <issueType>ENHANCEMENT</issueType>
+    <comments xmi:id="_N6_gwIovEemzBZ-E45XgHQ" uuid="4" text="12312312321" dateCreated="" author="_--vT0IkxEemOIe1_sA_OEg">
+      <replies xmi:id="_O2Eo8IovEemzBZ-E45XgHQ" uuid="5" text="asdasdasdsada" author="_--vT0IkxEemOIe1_sA_OEg">
+        <replies xmi:id="_0Y634IoyEemzBZ-E45XgHQ" uuid="6" text="1231231"/>
+        <replies xmi:id="_1om-IIoyEemzBZ-E45XgHQ" uuid="7" text="345345"/>
+      </replies>
+      <replies xmi:id="_vNfNcIo1EemzBZ-E45XgHQ" uuid="8" text="33333" author="_--vT0IkxEemOIe1_sA_OEg"/>
+    </comments>
+    <comments xmi:id="_oUbSoIovEemzBZ-E45XgHQ" uuid="9" text="asdasdasd" author="_rvmzMIk2EemOIe1_sA_OEg"/>
+  </issues>
+  <issues xmi:id="_UDYsIIlPEemTkeRSx6a1Ig" uuid="11" title="" description="PNG output errors" status="CLOSED" blockers="_BXUFAIlDEemOIe1_sA_OEg" assignedTo="_rvmzMIk2EemOIe1_sA_OEg" versionsAffected="_TEjj0Ik4EemOIe1_sA_OEg">
+    <issueType>BUG</issueType>
+  </issues>
+  <issues xmi:id="_14LXMI1_EemSnpBd0HphaQ" uuid="3242" title="Add export to web option" author="_rvmzMIk2EemOIe1_sA_OEg" assignedTo="_rvmzMIk2EemOIe1_sA_OEg" versionsAffected="_TEjj0Ik4EemOIe1_sA_OEg">
+    <issueType>ENHANCEMENT</issueType>
+  </issues>
+  <members xmi:id="_--vT0IkxEemOIe1_sA_OEg" uuid="12" firstName="Member" lastName="B" comments="_N6_gwIovEemzBZ-E45XgHQ _O2Eo8IovEemzBZ-E45XgHQ _vNfNcIo1EemzBZ-E45XgHQ" issuesAssigned="__l81EIlCEemOIe1_sA_OEg"/>
+  <members xmi:id="_rvmzMIk2EemOIe1_sA_OEg" uuid="13" firstName="Member" lastName="B" issuesCreated="__l81EIlCEemOIe1_sA_OEg _BXUFAIlDEemOIe1_sA_OEg _14LXMI1_EemSnpBd0HphaQ" comments="_oUbSoIovEemzBZ-E45XgHQ" issuesAssigned="_BXUFAIlDEemOIe1_sA_OEg _UDYsIIlPEemTkeRSx6a1Ig _14LXMI1_EemSnpBd0HphaQ"/>
+</trackit:IssueTracker>

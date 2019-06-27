@@ -1,0 +1,26 @@
+[% import "utils.egl"; %]
+[%=TemplateFactory.load("sources/navbar.egl").process()%]
+[%=TemplateFactory.load("sources/css/grid.egl").process()%]
+
+<h1 style="text-align:center;">Products</h1>
+<table>
+	<tr>
+		<th>Name</th>
+		<th>UUID</th>
+		<th>Versions</th>
+	</tr>
+	
+	[% for (p in products) {%]
+	     <tr>
+	      <td>[%=p.name%]</td>
+	      <td>[%=p.createLink()%]</a></td>
+	      <td>
+	      [% for (v in p.version) {%]
+	      	<p>[%=v.createLink(p.uuid)%]</p>		
+	      [%}%]
+	      <p><b>Total Versions: [%=p.version.size()%]<b></p>
+		  </td>
+	     </tr>
+	[%}%]
+	
+</table>

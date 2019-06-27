@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Conference xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="conference" xmi:id="_JVKtsMb2Eei3k4abl0yh1A">
+  <participants xmi:id="_gInQUMb2Eei3k4abl0yh1A" fullName="Tom Klapwijk" affiliation="Speaker"/>
+  <participants xmi:id="_jl3aUMb2Eei3k4abl0yh1A" fullName="Attendant1" affiliation="Attendant"/>
+  <rooms xmi:id="_ZHQtcMb2Eei3k4abl0yh1A" name="PX001"/>
+  <days xmi:id="_T3EmMMb2Eei3k4abl0yh1A" name="First Day">
+    <slots xsi:type="Track" xmi:id="_XRW7wMb2Eei3k4abl0yh1A" start="1" end="2" room="_ZHQtcMb2Eei3k4abl0yh1A" title="First amazing event">
+      <talks xmi:id="_eyJMoMb2Eei3k4abl0yh1A" title="Tom's amazing talk" speaker="_gInQUMb2Eei3k4abl0yh1A" discussant="_jl3aUMb2Eei3k4abl0yh1A"/>
+    </slots>
+  </days>
+</Conference>

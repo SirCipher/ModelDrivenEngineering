@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+
+<!--
+-->
+
+<plugin>
+
+   <extension point="org.eclipse.ui.newWizards">
+      <!-- @generated trackit -->
+      <category
+            id="org.eclipse.emf.ecore.Wizard.category.ID"
+            name="%_UI_Wizard_category"/>
+      <wizard
+            id="trackit.presentation.TrackitModelWizardID"
+            name="%_UI_TrackitModelWizard_label"
+            class="trackit.presentation.TrackitModelWizard"
+            category="org.eclipse.emf.ecore.Wizard.category.ID"
+            icon="icons/full/obj16/TrackitModelFile.gif">
+         <description>%_UI_TrackitModelWizard_description</description>
+         <selection class="org.eclipse.core.resources.IResource"/>
+      </wizard>
+   </extension>
+
+   <extension point="org.eclipse.ui.editors">
+      <!-- @generated trackit -->
+      <editor
+            id="trackit.presentation.TrackitEditorID"
+            name="%_UI_TrackitEditor_label"
+            icon="icons/full/obj16/TrackitModelFile.gif"
+            extensions="trackit"
+            class="trackit.presentation.TrackitEditor"
+            contributorClass="trackit.presentation.TrackitActionBarContributor">
+      </editor>
+   </extension>
+
+</plugin>

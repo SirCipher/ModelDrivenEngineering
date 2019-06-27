@@ -1,0 +1,86 @@
+pre { 
+	"Generating HTML files".println();
+}
+
+rule member
+	transform member : Member {
+		template : "sources/member.egl"
+		
+		target : "target/member_" + member.uuid + ".html"	
+	}
+	
+rule issues 
+	transform it : IssueTracker {
+		template : "sources/issues.egl"
+		
+		parameters : Map {
+			"issues" = it.issues
+		}
+		
+		target : "target/issues.html"	
+	}
+
+rule teams 
+	transform it : IssueTracker {
+		template : "sources/teams.egl"
+		
+		parameters : Map {
+			"teams" = it.teams
+		}
+		
+		target : "target/teams.html"	
+	}
+
+rule issue
+	transform issue : Issue {
+		template : "sources/issue.egl"
+		
+		target : "target/issue_" + issue.uuid + ".html"
+	}
+	
+rule team 
+	transform team : Team {
+		template : "sources/team.egl"
+		
+		target : "target/team_" + team.uuid + ".html"
+	}
+
+rule product
+	transform product : Product {
+		template : "sources/product.egl"
+				
+		target : "target/product_" + product.uuid + ".html"
+	}
+
+rule version
+	transform version : Version {
+		template : "sources/version.egl"
+				
+		target : "target/product_" + version.product.uuid + "_version_" + version.uuid + ".html"
+	}	
+
+rule products 
+	transform it : IssueTracker {
+		template : "sources/products.egl"
+		
+		parameters : Map {
+			"products" = it.products
+		}
+		
+		target : "target/products.html"	
+	}
+	
+rule members 
+	transform it : IssueTracker {
+		template : "sources/members.egl"
+		
+		parameters : Map {
+			"it" = it
+		}
+		
+		target : "target/members.html"	
+	}
+
+post {
+	"Generation complete".println();
+}

@@ -1,0 +1,107 @@
+[% import "utils.egl"; %]
+[%=TemplateFactory.load("sources/navbar.egl").process()%]
+[%=TemplateFactory.load("sources/css/grid.egl").process()%]
+
+<h1 style="text-align:center">Version: [%=version.name%], UUID: [%=version.uuid%]</h1>
+
+<h2 style="text-align:center">
+	<label>Total Progress:</label>
+	<progress id="progress" max="100" value="[%=version.getProgress()%]"/>
+</h2>
+
+<table>
+	<tr>
+		<th>Version Status</th>
+		<th>No. Members assigned</th>
+		<th>No. Open Issues</th>
+		<th>No. Closed Issues</th>
+		<th>Total Issues</th>
+	</tr>
+	
+	<tr>
+		<td>[%=version.status.literal%]</td>
+		<td>[%=version.getNoMembers()%]</td>
+		<td>[%=version.issues.select(i | i.status == IssueStatus#OPEN).size%]</td>
+		<td>[%=version.issues.select(i | i.status == IssueStatus#CLOSED).size%]</td>
+		<td>[%=version.issues.size%]</td>
+	</tr>
+</table>
+
+<h1 style="text-align:center;">Open Issues</h1>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Title</th>
+		<th>Description</th>
+		<th>Date Created</th>
+		<th>Issue Type</th>
+	</tr>
+	
+	[% for (i in version.getIssues(IssueStatus#OPEN)) {%]
+	     <tr>
+	      <td>[%=i.createLink()%]</td>	      
+	      <td>[%=i.title%]</td>
+	      <td>[%=i.description%]</td>
+	      <td>[%=i.dateCreated%]</td>
+	      <td>[%=i.issueType.enumSetToString()%]</td>
+	     </tr>
+	[%}%]
+</table>
+
+<h1 style="text-align:center;">Closed Issues</h1>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Title</th>
+		<th>Description</th>
+		<th>Date Created</th>
+		<th>Issue Type</th>
+	</tr>
+	
+	[% for (i in version.getIssues(IssueStatus#CLOSED)) {%]
+	     <tr>
+	      <td>[%=i.createLink()%]</td>	      
+	      <td>[%=i.title%]</td>
+	      <td>[%=i.description%]</td>
+	      <td>[%=i.dateCreated%]</td>
+	      <td>[%=i.issueType.enumSetToString()%]</td>
+	     </tr>
+	[%}%]
+</table>
+
+[%
+
+
+operation Version getIssues(condition) : Sequence {
+	var results = new Set();
+	
+	for (i in self.issues) {
+		if (i.status == condition) {
+			results.add(i);
+		} 
+	} 
+			
+	return results.sortBy(i | i.uuid);
+}
+
+operation Version getProgress() : Integer {
+	var closed = self.issues.select(i | i.status == IssueStatus#CLOSED);
+	
+	if (closed.size() == 0) {
+		return 0;
+	}
+
+	return (closed.size().asDouble() / self.issues.size().asDouble() * 100).asInteger();
+}
+
+operation Version getNoMembers() : Integer {
+	var result = new Set();
+	
+	for (i in self.issues) {
+		result.add(i.assignedTo);
+	}	
+	
+	return result.size();
+}
+
+%]

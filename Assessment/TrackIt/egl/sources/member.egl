@@ -1,0 +1,43 @@
+[% import "utils.egl"; %]
+[%=TemplateFactory.load("sources/navbar.egl").process()%]
+[%=TemplateFactory.load("sources/css/grid.egl").process()%]
+
+<h1 style="text-align:center">Member: [%=member.firstName + " " + member.lastName%], UUID: [%=member.uuid%]</h1>
+
+[% if (member.issuesAssigned.size() > 0) {%]
+<h2 style="text-align:center">Issues Assigned:</h1>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Name</th>
+	</tr>
+	
+	[% for (i in member.issuesAssigned) {%]
+	     <tr>
+	      <td>[%=i.createLink()%]</a></td>
+	      <td>[%=i.title%]</td>
+	     </tr>
+	[%}%]
+</table>
+[% } else {%]
+<h2 style="text-align:center">No issues assigned</h1>
+[% } %]
+
+[% if (member.issuesCreated.size() > 0) {%]
+<h2 style="text-align:center">Issues Created:</h1>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Name</th>
+	</tr>
+	
+	[% for (i in member.issuesCreated) {%]
+	     <tr>
+	      <td>[%=i.createLink()%]</a></td>
+	      <td>[%=i.title%]</td>
+	     </tr>
+	[%}%]
+</table>
+[% } else {%]
+<h2 style="text-align:center">No issues created</h1>
+[% } %]

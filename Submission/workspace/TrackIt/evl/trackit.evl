@@ -1,0 +1,156 @@
+context IssueTracker {
+	critique ProjectName {
+		check : self.projectName.isDefined() and self.projectName.length() > 0
+		message : "Project name should be defined."
+	}
+}
+
+context Issue {
+
+	constraint DescriptionLength {
+		check : self.description.isDefined() and self.description.length() >= 10
+		message : "Issue: " + self.uuid + ". Description must be at least 10 characters in length."
+	}
+	
+	// Ensures that an issue only has one type of product associated with it. 
+	// Ignores ones that have no product associated with it as they will be picked up by another constraint 
+	constraint ProductsAllSameType {
+		check : self.versionsAffected.isDefined() and self.versionsAffected.exists(p | p.name.isDefined()).asSet().size < 2		
+		message : 'Versions must all be of the same produt type.'
+	}
+	
+	// Disallow duplicate item to be itself
+	constraint DuplicateNotSelf {
+		check : not self.duplicateOf.exists(i| i == self)		
+		message : "Duplicate item cannot be itself. Issue ID: " + self.id
+		
+		fix {
+			title : "Remove this issue."
+			
+			do {
+				self.duplicateOf.remove(self);
+			}
+		}
+	}
+	
+	constraint NotConflictingType {
+		check : self.issueType.isDefined() and not (self.issueType.exists(it | it == IssueType#ENHANCEMENT) and self.issueType.exists(it | it == IssueType#BUG))
+		message : "Issue " + self.uuid + " cannot be both a bug and an enhancement." 
+	}
+	
+	// Recommend that the user marks duplicates as closed and sets the IssueType to DUPLICATE
+	critique CloseDuplicates {
+		check : not self.duplicateOf.exists(dup | dup.status == IssueStatus#OPEN)
+		message : "Issue: " + self.uuid + ". " + self.duplicateOf.size() + " duplicates detected."
+		
+		fix {
+			title : "Close issue(s) and mark as a duplicate."
+			do {
+				for (dup in self.duplicateOf) {
+					dup.status = IssueStatus#CLOSED;
+					dup.issueType = IssueType#DUPLICATE;
+				}
+			}
+		}
+	}
+	
+	constraint DetectBlockingCycle {	
+		check {
+			for (i in self.blocking) {
+				if (i.blocking.contains(self)) {
+					return false;
+				}
+			}
+
+			return true;
+		}
+		
+		message : "Issue: " + self.id + " involved in a blocking cycle. An issue cannot block another issue that is blocking itself."
+	}
+	
+	// Check that none of the blockers are currently open
+	constraint NoOpenBlockers {
+		guard : self.blockers.isDefined() and self.status == IssueStatus#CLOSED
+		check : not self.blockers.exists(it | it.status == IssueStatus#OPEN)
+		message : "Cannot close issue ID: " + self.id + " due to open blockers."
+	}
+	
+	// Bugs can block enhancement requests
+ 	// Check if the issue has been marked as closed and is an enhancement request
+	constraint NotBlockingBugs {
+	 	guard : self.status == IssueStatus#CLOSED and self.issueType.exists(it | it == IssueType#ENHANCEMENT)
+	 	check : not self.blockers.exists(it | it.issueType.exists(bit | bit == IssueType#BUG)) 		
+ 		message : "Issue ID: " + self.id + " cannot be marked as complete due to incomplete blocking bugs. Complete all blocking bugs before closing this issue."
+	}
+	
+	constraint HasVersion {
+		check : self.versionsAffected.isDefined() and self.versionsAffected.size() > 0
+		message : "Issue: " + self.id + " does not contain a version. All issues must contain at least one product version affected."
+	}
+}
+
+context Team {
+	// Prompt the user to check the team name but do not enforce one
+	critique TeamName {
+		guard : self.teamName.isDefined()
+		check : not(self.teamName.trim().size() == 0)
+		message : "Issue: " + self.uuid + ". " + "Should the team name be empty?"
+	}
+}
+
+context Member {
+
+	critique FirstNameCasing {
+		guard : self.firstName.isDefined()
+		check : self.firstName == self.firstName.firstToUpperCase()
+		message : "Issue: " + self.uuid + ". Should the first name begin with an uppercase letter?"
+		
+		fix {
+			title : "Rename to " + self.firstName.firstToUpperCase() + "?"
+			
+			do {
+				self.firstName = self.firstName.firstToUpperCase();
+			}
+		}
+	}
+	
+	critique LastNameCasing {
+		guard : self.lastName.isDefined()
+		check : self.lastName == self.lastName.firstToUpperCase()
+		message : "Issue: " + self.uuid + ". Should the last name begin with an uppercase letter?"
+		
+		fix {
+			title : "Rename to " + self.lastName.firstToUpperCase() + "?"
+			
+			do {
+				self.lastName = self.lastName.firstToUpperCase();
+			}
+		}
+	}
+}
+
+context Comment {
+
+	critique MinLength {
+		guard: self.text.isDefined()
+		check : self.text.trim().size() >= 1
+		message : "Comment should not be empty"
+	}
+
+}
+
+context Version {
+	
+	// Disallow completing a version if it contains open issues
+	constraint OpenIssues {
+		guard : self.status == VersionStatus#COMPLETE
+		check : not self.issues.exists(i | i.status == IssueStatus#OPEN)		
+		message : "All issues must be closed before marking a version as complete."
+	}
+	
+	constraint HasProduct {
+		check : self.product.isDefined()
+		message : "No associated product for version: " + self.id
+	}
+	
+}

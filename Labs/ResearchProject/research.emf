@@ -1,0 +1,41 @@
+@namespace(uri="research", prefix="")
+package research;
+
+class Project {
+	attr String name;
+	val Work[+] work;
+	val Partner[+] partners;
+}
+
+class Partner {
+	attr String name;
+	attr Type type;
+}
+
+enum Type {
+	UNIVERSITY;
+	COMPANY;
+	CHARITY;
+}
+
+// Should be dates but easier for testing to have strings
+class Duration{
+	attr String startDate;
+	attr String endDate;
+}
+
+class Work {
+	attr String name;
+	val Deliverable[+] deliverables;
+}
+
+class Deliverable {
+	attr String name;
+	val Task[+] tasks;
+}
+
+class Task {
+	attr String name;
+	val Duration duration;
+	ref Partner[+] partners;
+}

@@ -1,0 +1,7 @@
+# Tracing options for the TrackIt.diagram plug-in
+
+# Common issues
+TrackIt.diagram/debug=false
+
+# Visual IDs
+TrackIt.diagram/debug/visualID=false

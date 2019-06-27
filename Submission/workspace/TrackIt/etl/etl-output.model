@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<trackit:IssueTracker xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:trackit="trackit" projectName="P1">
+  <teams uuid="23423432423" teamName="Managers" members="234235 2"/>
+  <products uuid="98789789789" name="Microsoft Word">
+    <version uuid="092384902" name="1.0" issues="123123"/>
+  </products>
+  <issues uuid="123123" title="Can't open files" description="" assignedTo="2 234235" versionsAffected="092384902"/>
+  <issues uuid="sdfdsfdsfsdfsdfs" assignedTo="2"/>
+  <members uuid="234235" issuesAssigned="123123"/>
+  <members uuid="2" issuesAssigned="123123 sdfdsfdsfsdfsdfs"/>
+</trackit:IssueTracker>

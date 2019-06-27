@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="ASCII"?>
+<trackit:IssueTracker xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:trackit="trackit" xmi:id="_6RB4gIh2EemOIe1_sA_OEg" projectName="P1">
+  <teams xmi:id="_LY02wIkCEemOIe1_sA_OEg" uuid="23423432423" teamName="Managers" members="_MCzA0IkCEemOIe1_sA_OEg _MSEy8IkCEemOIe1_sA_OEg"/>
+  <products xmi:id="_PbceAIkKEemOIe1_sA_OEg" uuid="98789789789" name="Microsoft Word">
+    <version xmi:id="_PtrdgIkKEemOIe1_sA_OEg" uuid="092384902" name="1.0" issues="_L0b0sIkCEemOIe1_sA_OEg"/>
+  </products>
+  <products xmi:id="_VMM7sIkKEemOIe1_sA_OEg" uuid="123123123123" name="Microsoft Excel">
+    <version xmi:id="_VbulcIkKEemOIe1_sA_OEg" uuid="64685764651" name="1.1"/>
+  </products>
+  <issues xmi:id="_L0b0sIkCEemOIe1_sA_OEg" uuid="123123" title="Can't open files" description="" assignedTo="_MSEy8IkCEemOIe1_sA_OEg _MCzA0IkCEemOIe1_sA_OEg" versionsAffected="_PtrdgIkKEemOIe1_sA_OEg"/>
+  <issues xmi:id="_UtF90IkKEemOIe1_sA_OEg" uuid="sdfdsfdsfsdfsdfs" blockers="_kDqaQI1fEemSnpBd0HphaQ" assignedTo="_MSEy8IkCEemOIe1_sA_OEg"/>
+  <issues xmi:id="_kDqaQI1fEemSnpBd0HphaQ" status="CLOSED" blocking="_UtF90IkKEemOIe1_sA_OEg"/>
+  <members xmi:id="_MCzA0IkCEemOIe1_sA_OEg" uuid="234235" issuesAssigned="_L0b0sIkCEemOIe1_sA_OEg"/>
+  <members xmi:id="_MSEy8IkCEemOIe1_sA_OEg" uuid="2" issuesAssigned="_L0b0sIkCEemOIe1_sA_OEg _UtF90IkKEemOIe1_sA_OEg"/>
+</trackit:IssueTracker>

@@ -1,0 +1,146 @@
+[% import "utils.egl"; %]
+[%=TemplateFactory.load("sources/navbar.egl").process()%]
+[%=TemplateFactory.load("sources/css/grid.egl").process()%]
+
+<h1 style="text-align:center">Issue: [%=issue.title%], UUID: [%=issue.uuid%]</h1>
+
+<table>
+	<tr>
+		<th>Author</th>
+	  	<th>Date Created</th>
+		<th>Issue Status</th>
+		<th>Issue Type</th>
+		<th>No. Members assigned</th>
+		<th>No. Blocking</th>
+		<th>No. Blockers</th>
+	</tr>
+	
+	<tr>
+		<td>[%=issue.getDerivedFullName()%]</td>
+		<td>[%=issue.dateCreated%]</td>
+		<td>[%=issue.status%]</td>
+        <td>[%=issue.issueType.enumSetToString()%]</td>
+        <td>[%=issue.assignedTo.size()%]</td>
+        <td>[%=issue.blocking.size()%]</td>
+        <td>[%=issue.blockers.size()%]</td>
+	</tr>
+</table>
+
+<h2 style="text-align:center">Assigned to:</h1>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Name</th>
+	</tr>
+	
+	[% for (m in issue.assignedTo) {%]
+	     <tr>
+	      <td>[%=m.createLink()%]</a></td>
+	      <td>[%=m.firstName + " " + m.lastName%]</td>
+	     </tr>
+	[%}%]
+	
+</table>
+
+[% if (issue.duplicateOf.size() > 0) {%]
+<h2 style="text-align:center">Duplicate of:</h1>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Name</th>
+	</tr>
+	
+	[% for (i in issue.duplicateOf) {%]
+	     <tr>
+	      <td>[%=i.createLink()%]</a></td>
+	      <td>[%=i.title%]</td>
+	     </tr>
+	[%}%]
+</table>
+[% } %]
+
+[% if (issue.dependencies.size() > 0) {%]
+<h2 style="text-align:center">Dependencies of:</h1>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Name</th>
+	</tr>
+	
+	[% for (i in issue.duplicateOf) {%]
+	     <tr>
+	      <td>[%=i.createLink()%]</a></td>
+	      <td>[%=i.title%]</td>
+	     </tr>
+	[%}%]
+</table>
+[% } %]
+
+<h2 style="text-align:center">Versions affected:</h1>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Name</th>
+	</tr>
+	
+	[% for (v in issue.versionsAffected) {%]
+	     <tr>
+	      <td><a href=product_[%=v.product.uuid%]_version_[%=v.uuid%].html>[%=v.uuid%]</a></td>
+	      <td>[%=v.name%]</td>
+	     </tr>
+	[%}%]
+	
+</table>
+
+[% if (issue.blockers.size() > 0) {%]
+<h2 style="text-align:center">Blockers:</h1>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Name</th>
+	</tr>
+	
+	[% for (i in issue.blockers) {%]
+	     <tr>
+	      <td>[%=i.createLink()%]</a></td>
+	      <td>[%=i.title%]</td>
+	     </tr>
+	[%}%]
+</table>
+[% } %]
+
+[% if (issue.blocking.size() > 0) {%]
+<h2 style="text-align:center">Blocking:</h1>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Name</th>
+	</tr>
+	
+	[% for (i in issue.blocking) {%]
+	     <tr>
+	      <td>[%=i.createLink()%]</a></td>
+	      <td>[%=i.title%]</td>
+	     </tr>
+	[%}%]
+</table>
+[% } %]
+
+[% if (issue.comments.size() > 0) {%]
+<h2 style="text-align:center;">Comments:</h2>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Date Created</th>
+		<th>Text</th>
+		<th>Replies</th>
+	</tr>
+	
+	[% for (c in issue.comments) {%]
+     	[%=c.getComments()%]
+	[%}%]
+</table>
+[% } else {%]
+<h2 style="text-align:center">No comments</h1>
+[% } %]
+

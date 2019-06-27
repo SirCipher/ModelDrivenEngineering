@@ -1,0 +1,80 @@
+[%
+
+operation OrderedSet enumSetToString() : String {
+	var result = "";
+	var first = true;
+		
+	for (e in self) {
+		if (first) {
+			result = e.literal;
+			first = false;
+		} else {
+			result = result + ", " + e.literal;
+		}	
+	}
+	
+	return result;
+}
+
+
+operation Team getIssues(condition) : Sequence {
+	var results = new Set();
+	
+	for (m in self.members) {
+		results.addAll(m.issuesAssigned.select(i | i.status == condition));
+	} 
+			
+	return results.sortBy(i | i.uuid);
+}
+
+operation Issue getDerivedFullName() : String {
+	if (self.author.isDefined()) {
+		return '<a href="member_' + self.author.uuid + '.html">' + self.author.firstName + ' ' + self.author.lastName + '</a>';
+	} else {
+		return '';
+	}
+}
+
+operation Issue createLink() : String {
+	return '<a href="issue_' + self.uuid +'.html">' + self.uuid + '</a>';
+}
+
+operation Member createLink() : String {
+	return '<a href="member_' + self.uuid +'.html">' + self.uuid + '</a>';
+}
+
+operation Team createLink() : String {
+	return '<a href="team_' + self.uuid +'.html">' + self.teamName + '</a>';
+}
+
+operation Product createLink() : String {
+	return '<a href="product_' + self.uuid +'.html">' + self.uuid + '</a>';
+}
+
+operation Version createLink(product : String) : String {
+	return '<a href="product_' + product + '_version_' + self.uuid +'.html">' + self.name + '</a>';
+}
+
+operation IssueTracker findTeams(it : IssueTracker, m : Member) : OrderedSet {
+	return it.teams.select(t | t.members.contains(m));
+}
+
+operation Comment getComments() : String {
+	var result = "<tr><td>" + self.uuid + "</td><td>" + self.dateCreated + "</td><td>" + self.text + "</td>";
+	
+	if (self.replies.size() > 0) {
+		result = result + "<td>";
+		
+		for (comment in self.replies) {
+			result = result + "<br>" + comment.author.createLink() + ": " + comment.text + " - " + self.dateCreated + "</br>";
+		}	
+		
+		result = result + "</td>";
+	}
+ 	
+ 	result = result + "</tr>";
+ 	
+ 	return result;
+}
+
+%]

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>TrackIt!</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">TrackIt!</a>
+    </div>
+    <ul class="nav navbar-nav">
+      <li><a href="teams.html">Teams</a></li>
+      <li><a href="members.html">Members</a></li>
+      <li><a href="products.html">Products</a></li>
+      <li><a href="issues.html">Issues</a></li>
+    </ul>
+  </div>
+</nav>
+  
+  <style>
+    table {
+      font-family: arial, sans-serif;
+      border-collapse: collapse;
+      width: 100%;
+    }
+    
+    td, th {
+      border: 1px solid #dddddd;
+      text-align: left;
+      padding: 8px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: #dddddd;
+    }
+</style>
+
+<h1 style="text-align:center">Version: 2018, UUID: 54</h1>
+
+<h2 style="text-align:center">
+	<label>Total Progress:</label>
+	<progress id="progress" max="100" value="0"/>
+</h2>
+
+<table>
+	<tr>
+		<th>Version Status</th>
+		<th>No. Members assigned</th>
+		<th>No. Open Issues</th>
+		<th>No. Closed Issues</th>
+		<th>Total Issues</th>
+	</tr>
+	
+	<tr>
+		<td>IN_PROGRESS</td>
+		<td>1</td>
+		<td>1</td>
+		<td>0</td>
+		<td>1</td>
+	</tr>
+</table>
+
+<h1 style="text-align:center;">Open Issues</h1>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Title</th>
+		<th>Description</th>
+		<th>Date Created</th>
+		<th>Issue Type</th>
+	</tr>
+	
+	     <tr>
+	      <td><a href="issue_234453.html">234453</a></td>	      
+	      <td>Random crashes</td>
+	      <td>GIFs don't create correctly</td>
+	      <td></td>
+	      <td>BUG, DUPLICATE</td>
+	     </tr>
+</table>
+
+<h1 style="text-align:center;">Closed Issues</h1>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Title</th>
+		<th>Description</th>
+		<th>Date Created</th>
+		<th>Issue Type</th>
+	</tr>
+	
+</table>
+

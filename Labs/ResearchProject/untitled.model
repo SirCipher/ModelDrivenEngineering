@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="ASCII"?>
+<Project xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns="research" xmi:id="_8Wss4MxrEeiOYdhZW8iXow">
+  <work xmi:id="_9XdmUMxrEeiOYdhZW8iXow" name="">
+    <deliverables xmi:id="_WJ0FoMxsEeiOYdhZW8iXow">
+      <tasks xmi:id="_WilK8MxsEeiOYdhZW8iXow" name="Task1" partners="_7AYkwMxsEeiOYdhZW8iXow">
+        <duration xmi:id="_2OIhQMxtEeiOYdhZW8iXow" startDate="Start Date" endDate="End Date"/>
+      </tasks>
+    </deliverables>
+  </work>
+  <partners xmi:id="_7AYkwMxsEeiOYdhZW8iXow" name="University1"/>
+</Project>

@@ -1,0 +1,19 @@
+@namespace(uri="softwareDistribution", prefix="")
+package softwareDistribution;
+
+class Bundle {
+	attr String name;
+	attr double price;
+	val Pool[+] pools;
+}
+
+class Pool {
+	attr String name;
+	val Component[+] components;
+}
+
+class Component {
+	attr String name;
+	attr String url;
+	ref Component[*] dependencies;
+}

@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="ASCII"?>
+<gmfgraph:Canvas xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:gmfgraph="http://www.eclipse.org/gmf/2006/GraphicalDefinition" name="trackit">
+  <figures name="Default">
+    <figures xsi:type="gmfgraph:PolylineDecoration" name="TeamMembersFigureTargetDecoration"/>
+    <figures xsi:type="gmfgraph:PolylineDecoration" name="IssueDuplicateOfFigureTargetDecoration"/>
+    <figures xsi:type="gmfgraph:PolylineDecoration" name="IssueDependenciesFigureTargetDecoration"/>
+    <figures xsi:type="gmfgraph:PolylineDecoration" name="IssueVersionsAffectedFigureTargetDecoration"/>
+    <figures xsi:type="gmfgraph:PolylineDecoration" name="IssueBlockingFigureTargetDecoration"/>
+    <descriptors name="MemberFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="MemberFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="MemberLabelFigure" text="Member"/>
+      </actualFigure>
+      <accessors accessor="getFigureMemberLabelFigure" figure="//@figures.0/@descriptors.0/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="TeamFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="TeamFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="TeamLabelFigure" text="Team"/>
+      </actualFigure>
+      <accessors accessor="getFigureTeamLabelFigure" figure="//@figures.0/@descriptors.1/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="ProductFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="ProductFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="ProductLabelFigure" text="Product">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="ProductVersionCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureProductLabelFigure" figure="//@figures.0/@descriptors.2/@actualFigure/@children.0"/>
+      <accessors accessor="getProductVersionCompartmentFigure" figure="//@figures.0/@descriptors.2/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="VersionFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="VersionFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="VersionLabelFigure" text="Version"/>
+      </actualFigure>
+      <accessors accessor="getFigureVersionLabelFigure" figure="//@figures.0/@descriptors.3/@actualFigure/@children.0"/>
+    </descriptors>
+    <descriptors name="IssueFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="IssueFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="IssueLabelFigure" text="Issue">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="IssueCommentsCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureIssueLabelFigure" figure="//@figures.0/@descriptors.4/@actualFigure/@children.0"/>
+      <accessors accessor="getIssueCommentsCompartmentFigure" figure="//@figures.0/@descriptors.4/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="CommentFigure">
+      <actualFigure xsi:type="gmfgraph:RoundedRectangle" name="CommentFigure">
+        <border xsi:type="gmfgraph:MarginBorder">
+          <insets top="5" left="5" bottom="5" right="5"/>
+        </border>
+        <children xsi:type="gmfgraph:Label" name="CommentLabelFigure" text="Comment">
+          <maximumSize dx="10000" dy="50"/>
+        </children>
+        <children xsi:type="gmfgraph:Rectangle" name="CommentRepliesCompartmentFigure" outline="false"/>
+      </actualFigure>
+      <accessors accessor="getFigureCommentLabelFigure" figure="//@figures.0/@descriptors.5/@actualFigure/@children.0"/>
+      <accessors accessor="getCommentRepliesCompartmentFigure" figure="//@figures.0/@descriptors.5/@actualFigure/@children.1"/>
+    </descriptors>
+    <descriptors name="MemberIssuesAssignedFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="MemberIssuesAssignedFigure"/>
+    </descriptors>
+    <descriptors name="MemberIssuesAssignedExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="MemberIssuesAssignedExternalLabel" text="Issues assigned"/>
+    </descriptors>
+    <descriptors name="TeamMembersFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="TeamMembersFigure" targetDecoration="//@figures.0/@figures.0">
+        <foregroundColor xsi:type="gmfgraph:RGBColor" red="153" green="186" blue="221"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="TeamMembersExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="TeamMembersExternalLabel" text="Members"/>
+    </descriptors>
+    <descriptors name="IssueDuplicateOfFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="IssueDuplicateOfFigure" lineKind="LINE_DASH" targetDecoration="//@figures.0/@figures.1">
+        <foregroundColor xsi:type="gmfgraph:RGBColor" red="220" green="20" blue="60"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="IssueDuplicateOfExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="IssueDuplicateOfExternalLabel" text="Duplicate of"/>
+    </descriptors>
+    <descriptors name="IssueDependenciesFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="IssueDependenciesFigure" lineKind="LINE_DASH" targetDecoration="//@figures.0/@figures.2">
+        <foregroundColor xsi:type="gmfgraph:RGBColor" red="34" green="139" blue="34"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="IssueDependenciesExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="IssueDependenciesExternalLabel" text="Dependencies"/>
+    </descriptors>
+    <descriptors name="IssueVersionsAffectedFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="IssueVersionsAffectedFigure" lineKind="LINE_DASH" targetDecoration="//@figures.0/@figures.3"/>
+    </descriptors>
+    <descriptors name="IssueVersionsAffectedExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="IssueVersionsAffectedExternalLabel" text="Versions Affected"/>
+    </descriptors>
+    <descriptors name="IssueBlockingFigure">
+      <actualFigure xsi:type="gmfgraph:PolylineConnection" name="IssueBlockingFigure" targetDecoration="//@figures.0/@figures.4">
+        <foregroundColor xsi:type="gmfgraph:RGBColor" red="255" blue="255"/>
+      </actualFigure>
+    </descriptors>
+    <descriptors name="IssueBlockingExternalLabelFigure">
+      <actualFigure xsi:type="gmfgraph:Label" name="IssueBlockingExternalLabel" text="Blocking"/>
+    </descriptors>
+  </figures>
+  <nodes name="Member" figure="MemberFigure"/>
+  <nodes name="Team" figure="TeamFigure"/>
+  <nodes name="Product" figure="ProductFigure"/>
+  <nodes name="Version" figure="VersionFigure"/>
+  <nodes name="Issue" figure="IssueFigure"/>
+  <nodes name="Comment" figure="CommentFigure"/>
+  <connections name="MemberIssuesAssigned" figure="MemberIssuesAssignedFigure"/>
+  <connections name="TeamMembers" figure="TeamMembersFigure"/>
+  <connections name="IssueDuplicateOf" figure="IssueDuplicateOfFigure"/>
+  <connections name="IssueDependencies" figure="IssueDependenciesFigure"/>
+  <connections name="IssueVersionsAffected" figure="IssueVersionsAffectedFigure"/>
+  <connections name="IssueBlocking" figure="IssueBlockingFigure"/>
+  <compartments name="ProductVersionCompartment" figure="ProductFigure" collapsible="true" accessor="//@figures.0/@descriptors.2/@accessors.1"/>
+  <compartments name="IssueCommentsCompartment" figure="IssueFigure" collapsible="true" accessor="//@figures.0/@descriptors.4/@accessors.1"/>
+  <compartments name="CommentRepliesCompartment" figure="CommentFigure" collapsible="true" accessor="//@figures.0/@descriptors.5/@accessors.1"/>
+  <labels name="MemberLabel" figure="MemberFigure" accessor="//@figures.0/@descriptors.0/@accessors.0"/>
+  <labels name="TeamLabel" figure="TeamFigure" accessor="//@figures.0/@descriptors.1/@accessors.0"/>
+  <labels name="ProductLabel" figure="ProductFigure" accessor="//@figures.0/@descriptors.2/@accessors.0"/>
+  <labels name="VersionLabel" figure="VersionFigure" accessor="//@figures.0/@descriptors.3/@accessors.0"/>
+  <labels name="IssueLabel" figure="IssueFigure" accessor="//@figures.0/@descriptors.4/@accessors.0"/>
+  <labels name="CommentLabel" figure="CommentFigure" accessor="//@figures.0/@descriptors.5/@accessors.0"/>
+  <labels name="MemberIssuesAssignedExternalLabel" figure="MemberIssuesAssignedExternalLabelFigure" elementIcon="false"/>
+  <labels name="TeamMembersExternalLabel" figure="TeamMembersExternalLabelFigure" elementIcon="false"/>
+  <labels name="IssueDuplicateOfExternalLabel" figure="IssueDuplicateOfExternalLabelFigure" elementIcon="false"/>
+  <labels name="IssueDependenciesExternalLabel" figure="IssueDependenciesExternalLabelFigure" elementIcon="false"/>
+  <labels name="IssueVersionsAffectedExternalLabel" figure="IssueVersionsAffectedExternalLabelFigure" elementIcon="false"/>
+  <labels name="IssueBlockingExternalLabel" figure="IssueBlockingExternalLabelFigure" elementIcon="false"/>
+</gmfgraph:Canvas>

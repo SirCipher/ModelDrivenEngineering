@@ -1,0 +1,125 @@
+[% import "utils.egl"; %]
+[%=TemplateFactory.load("sources/navbar.egl").process()%]
+[%=TemplateFactory.load("sources/css/grid.egl").process()%]
+
+<h1 style="text-align:center">Product: [%=product.name%], UUID: [%=product.uuid%]</h1>
+
+<h2 style="text-align:center">
+	<label>Total Progress:</label>
+	<progress id="progress" max="100" value="[%=product.getProgress()%]"/>
+</h2>
+
+<table>
+	<tr>
+		<th>No. Members assigned</th>
+		<th>No. Open Issues</th>
+		<th>No. Closed Issues</th>
+		<th>Total Issues</th>
+	</tr>
+	
+	<tr>
+		<td>[%=product.getNoMembers()%]</td>
+		<td>[%=product.getIssues(IssueStatus#OPEN).size%]</td>
+		<td>[%=product.getIssues(IssueStatus#CLOSED).size%]</td>
+		<td>[%=product.getIssues(IssueStatus#OPEN).size + product.getIssues(IssueStatus#CLOSED).size%]</td>
+	</tr>
+</table>
+
+<h1 style="text-align:center;">Open Issues</h1>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Title</th>
+		<th>Description</th>
+		<th>Date Created</th>
+		<th>Issue Type</th>
+	</tr>
+	
+	[% for (i in product.getIssues(IssueStatus#OPEN)) {%]
+	     <tr>
+	      <td>[%=i.createLink()%]</td>	      
+	      <td>[%=i.title%]</td>
+	      <td>[%=i.description%]</td>
+	      <td>[%=i.dateCreated%]</td>
+	      <td>[%=i.issueType.enumSetToString()%]</td>
+	     </tr>
+	[%}%]
+</table>
+
+<h1 style="text-align:center;">Closed Issues</h1>
+<table>
+	<tr>
+		<th>UUID</th>
+		<th>Title</th>
+		<th>Description</th>
+		<th>Date Created</th>
+		<th>Issue Type</th>
+	</tr>
+	
+	[% for (i in product.getIssues(IssueStatus#CLOSED)) {%]
+	     <tr>
+	      <td>[%=i.createLink()%]</td>	      
+	      <td>[%=i.title%]</td>
+	      <td>[%=i.description%]</td>
+	      <td>[%=i.dateCreated%]</td>
+	      <td>[%=i.issueType.enumSetToString()%]</td>
+	     </tr>
+	[%}%]
+</table>
+
+[%
+operation Product getIssues(condition) : Sequence {
+	var results = new Set();
+	
+	for (v in self.version) {
+		for (i in v.issues) {
+			results.addAll(i.select(iss | iss.status == condition));
+		} 
+	}
+	
+	return results.sortBy(i | i.uuid);
+}
+
+operation Product getIssues(condition) : Sequence {
+	var results = new Set();
+	
+	for (v in self.version) {
+		for (i in v.issues) {
+			if (i.status == condition) {
+				results.add(i);
+			} 
+		}
+	}
+			
+	return results.sortBy(i | i.uuid);
+}
+
+operation Product getProgress() : Integer {
+	var closed = new Set();
+	var size = 0;
+	
+	for (v in self.version) {
+		closed.addAll(v.issues.select(i | i.status == IssueStatus#CLOSED));
+		size = size + v.issues.size();
+	}
+		
+	if (closed.size() == 0) {
+		return 0;
+	}
+
+	return (closed.size().asDouble() / size.asDouble() * 100).asInteger();
+}
+
+operation Product getNoMembers() : Integer {
+	var result = new Set();
+	
+	for (v in self.version) {
+		for (i in v.issues) {
+			result.add(i.assignedTo);
+		}		
+	}
+	
+	return result.size();
+}
+
+%]
